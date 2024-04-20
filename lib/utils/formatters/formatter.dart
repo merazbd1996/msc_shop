@@ -20,24 +20,27 @@ class TFormatter {
     return phoneNumber;
   }
 
-  static String internationalFormatPhoneNumber(String phoneNumber)}
-  var digitsOnly= phoneNumber.replaceAll(RegExp(r'\D'), '');
+  static String internationalFormatPhoneNumber(String phoneNumber) {
+    var digitsOnly = phoneNumber.replaceAll(RegExp(r'\D'), '');
 
-  String countryCode = '+${digitsOnly.substring(0,2)}';
-  digitsOnly = digitsOnly.substring(2);
+    String countryCode = '+${digitsOnly.substring(0, 2)}';
+    digitsOnly = digitsOnly.substring(2);
 
+    final formattedNumber = StringBuffer();
+    formattedNumber.write('($countryCode)');
+    int i = 0;
+    while (i < digitsOnly.length) {
+      int groupLength = 2;
+      if (i == 0 && countryCode == '+1') {
+        groupLength = 3;
+      }
+      int end = i + groupLength;
+      formattedNumber.write(digitsOnly.substring(i, end));
 
-  final formattedNumber = StringBuffer();
-  formattedNumber.write('($countryCode)');
-  int i = 0;
-  while(i<digitsOnly.length){
-    int groupLength = 2;
-    if(i== 0 && countryCode == '+1'){
-      groupLength = 3;
+      if (end < digitsOnly.length) {
+        formattedNumber.write('');
+      }
+      i = end;
     }
-    int end = i+groupLength;
-    formattedNumber.write(digitsOnly.substring(i, end));
-
-    if (end<digitsOnly)
   }
 }
