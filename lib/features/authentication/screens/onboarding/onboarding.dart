@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:msc_shop/features/authentication/controllers_onboarding/onboarding_controller.dart';
+import 'package:msc_shop/features/authentication/screens/onboarding/widgets/onboarding_dot.dart';
+import 'package:msc_shop/features/authentication/screens/onboarding/widgets/onboarding_next.dart';
 import 'package:msc_shop/features/authentication/screens/onboarding/widgets/onboarding_page.dart';
 import 'package:msc_shop/features/authentication/screens/onboarding/widgets/onboarding_skip.dart';
 import 'package:msc_shop/utils/constants/image_strings.dart';
@@ -15,11 +20,14 @@ class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OnBoardingController());
     return Scaffold(
       body: Stack(
         children: [
           //page list
           PageView(
+            controller: controller.pageController,
+            onPageChanged: controller.updatePageIndicator,
             children: [
               // First Page
               OnBoardingPage(image: TImages.onBoardingImage1, title: TText.onBoardingTitle1, subTitle: TText.onBoardingSubTitle1,),
@@ -30,7 +38,8 @@ class OnBoardingScreen extends StatelessWidget {
          // skip
           const OnBoardingSkip(),
           //indicator
-        OnBoardingDotNavigation()
+          const OnBoardingDotNavigation(),
+          const OnBoardingNextButton()
 
         ],
       ),
@@ -38,21 +47,9 @@ class OnBoardingScreen extends StatelessWidget {
   }
 }
 
-class OnBoardingDotNavigation extends StatelessWidget {
-  const OnBoardingDotNavigation({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
-    return Positioned(
-      bottom: TDeviceUtils.getBottomNaviationBarHeight() + 25,
-      left: TSizes.defaultSpace,
-        child: SmoothPageIndicator(controller: PageController(), count: 3,
-        effect: ExpandingDotsEffect(activeDotColor: dark ? TColors.light: TColors.dark, dotHeight: 6),));
-  }
-}
+
+
 
 
 
