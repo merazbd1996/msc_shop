@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:msc_shop/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:msc_shop/utils/theme/theme.dart';
 
+import 'features/authentication/screens/login/login.dart';
+
 void main() {
   runApp(const MyApp());
 }
