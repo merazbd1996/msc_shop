@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:msc_shop/common/styles/spacing_styles.dart';
 import 'package:msc_shop/utils/helpers/helper_functions.dart';
 import '../../../../utils/constants/sizes.dart';
-import 'login_widget/divider_line.dart';
+import '../../../../utils/constants/text_strings.dart';
+import '../../../../common/signupinds/divider_line.dart';
 import 'login_widget/login_form.dart';
 import 'login_widget/login_header.dart';
-import 'login_widget/social_button.dart';
+import '../../../../common/signupinds/social_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -20,9 +22,9 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               //logo, title,  and subtitle
-              LoginHeader(dark: dark),
+              const LoginHeader(),
               const LoginForm(),
-              TDivider(dark: dark),
+              TDivider(dividerText: TText.orSignInWith.capitalize!,),
               const SizedBox(height: TSizes.spaceBtwItems),
               const TSocialButton(),
             ],
